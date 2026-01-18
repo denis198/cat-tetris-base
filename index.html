@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Tetris</title>
+    <meta name="description" content="A fun Tetris game with cat emojis - Base Mini App">
+    <meta property="og:title" content="Cat Tetris">
+    <meta property="og:description" content="A fun Tetris game with cat emojis">
+    <meta property="og:image" content="https://your-vercel-url.vercel.app/splash.png">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🐱 Cat Tetris 🐱</h1>
+        <div class="game-wrapper">
+            <div class="info-panel">
+                <div class="score-board">
+                    <h2>Счёт</h2>
+                    <div id="score">0</div>
+                </div>
+                <div class="lines-board">
+                    <h2>Линии</h2>
+                    <div id="lines">0</div>
+                </div>
+                <div class="level-board">
+                    <h2>Уровень</h2>
+                    <div id="level">1</div>
+                </div>
+                <div class="controls">
+                    <h2>Управление</h2>
+                    <p>← → Движение</p>
+                    <p>↓ Ускорение</p>
+                    <p>↑ Поворот</p>
+                </div>
+            </div>
+            <canvas id="gameCanvas" width="300" height="600"></canvas>
+            <div class="next-panel">
+                <h2>Следующая</h2>
+                <canvas id="nextCanvas" width="120" height="120"></canvas>
+            </div>
+        </div>
+        <div id="gameOver" class="game-over hidden">
+            <h2>Игра окончена!</h2>
+            <p>Финальный счёт: <span id="finalScore">0</span></p>
+            <button onclick="game.restart()">Играть снова</button>
+        </div>
+    </div>
+    <script src="tetris.js"></script>
+</body>
+</html>
