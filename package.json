@@ -1,18 +1,7 @@
 {
   "name": "cat-tetris-base",
   "version": "1.0.0",
-  "description": "Cat Tetris mini app for Base - Static HTML project",
-  "type": "module",
-  "main": "index.html",
-  "scripts": {},
-  "keywords": [
-    "tetris",
-    "game",
-    "base",
-    "mini-app",
-    "static",
-    "html"
-  ],
-  "author": "",
-  "license": "MIT"
+  "description": "Static HTML Tetris game for Base Mini App",
+  "private": true,
+  "scripts": {}
 }
