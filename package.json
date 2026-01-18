@@ -12,8 +12,11 @@
     "tetris",
     "game",
     "base",
-    "mini-app"
+    "mini-app",
+    "static"
   ],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
 }
