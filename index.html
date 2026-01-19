@@ -60,12 +60,27 @@
     </div>
     <script src="tetris.js"></script>
     <!-- MiniKit ready signal for Base preview -->
-    <script src="https://unpkg.com/@coinbase/minikit-js@1.0.0/dist/index.umd.js"></script>
+    <script id="minikit-loader" src="https://cdn.jsdelivr.net/npm/@coinbase/minikit-js@1.1.0/dist/index.umd.js" defer></script>
     <script>
+      // Безопасный вызов MiniKit.ready с повторными попытками
+      function tryMiniKitReady(maxTries = 20, delay = 300) {
+        let tries = 0;
+        const timer = setInterval(() => {
+          if (window.MiniKit && typeof window.MiniKit.ready === 'function') {
+            try {
+              window.MiniKit.ready();
+              clearInterval(timer);
+            } catch (e) {
+              // игнор, пробуем ещё
+            }
+          }
+          tries++;
+          if (tries >= maxTries) clearInterval(timer);
+        }, delay);
+      }
+
       window.addEventListener('load', () => {
-        if (window.MiniKit && typeof window.MiniKit.ready === 'function') {
-          window.MiniKit.ready();
-        }
+        tryMiniKitReady();
         // Навешиваем обработчики на экранные кнопки
         const btnL = document.getElementById('btn-left');
         const btnR = document.getElementById('btn-right');
