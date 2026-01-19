@@ -2,9 +2,9 @@
   "version": "1.0.0",
   "name": "Cat Tetris",
   "description": "A fun Tetris game with cat emojis",
-  "iconUrl": "https://your-vercel-url.vercel.app/icon.png",
-  "splashImageUrl": "https://your-vercel-url.vercel.app/splash.png",
-  "homeUrl": "https://your-vercel-url.vercel.app",
+  "iconUrl": "https://cat-tetris-base.vercel.app/icon.svg",
+  "splashImageUrl": "https://cat-tetris-base.vercel.app/splash.svg",
+  "homeUrl": "https://cat-tetris-base.vercel.app",
   "accountAssociation": {
     "header": "X-Base-Account-Association",
     "payload": "YOUR_PAYLOAD_HERE",

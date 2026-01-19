@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#667eea"/>
+      <stop offset="100%" stop-color="#764ba2"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" fill="url(#g)" rx="32" ry="32"/>
+  <g fill="none" stroke="#ffffff" stroke-width="6" opacity="0.35">
+    <path d="M32 96h192"/>
+    <path d="M32 160h192"/>
+    <path d="M96 32v192"/>
+    <path d="M160 32v192"/>
+  </g>
+  <text x="50%" y="54%" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="86" font-weight="700" letter-spacing="4">CAT</text>
+</svg>
