@@ -1,10 +1,19 @@
 {
   "version": "1.0.0",
   "name": "Cat Tetris",
-  "description": "A fun Tetris game with cat emojis",
+  "description": "Play classic Tetris with cat emojis 🐱",
   "iconUrl": "https://cat-tetris-base.vercel.app/icon.svg",
   "splashImageUrl": "https://cat-tetris-base.vercel.app/splash.svg",
-  "homeUrl": "https://cat-tetris-base.vercel.app",
+  "splashBackgroundColor": "#667eea",
+  "homeUrl": "https://cat-tetris-base.vercel.app/",
+  "primaryCategory": "games",
+  "tags": [
+    "tetris",
+    "game",
+    "arcade",
+    "casual",
+    "cats"
+  ],
   "accountAssociation": {
     "header": "eyJmaWQiOjY2MjQ4OCwidHlwZSI6ImF1dGgiLCJrZXkiOiIweEJEYjNjRTA3MkI3YTIxQTViMTAzMTdBZEI1ODUwMkM4MTM5OTdGOWIifQ",
     "payload": "eyJkb21haW4iOiJjYXQtdGV0cmlzLWJhc2UudmVyY2VsLmFwcCJ9",
