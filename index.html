@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cat Tetris</title>
+    <!-- Base mini app verification -->
+    <meta name="base:app_id" content="696a892d891a0eaf2f956d4c">
     <meta name="description" content="A fun Tetris game with cat emojis - Base Mini App">
     <meta property="og:title" content="Cat Tetris">
     <meta property="og:description" content="A fun Tetris game with cat emojis">
@@ -47,6 +49,34 @@
             <button onclick="game.restart()">Играть снова</button>
         </div>
     </div>
+    <!-- Экранные кнопки управления для мобильных устройств -->
+    <div class="touch-controls">
+        <button aria-label="Влево" id="btn-left">←</button>
+        <div class="touch-center">
+            <button aria-label="Повернуть" id="btn-rotate">⟳</button>
+            <button aria-label="Вниз" id="btn-down">↓</button>
+        </div>
+        <button aria-label="Вправо" id="btn-right">→</button>
+    </div>
     <script src="tetris.js"></script>
+    <!-- MiniKit ready signal for Base preview -->
+    <script src="https://unpkg.com/@coinbase/minikit-js@1.0.0/dist/index.umd.js"></script>
+    <script>
+      window.addEventListener('load', () => {
+        if (window.MiniKit && typeof window.MiniKit.ready === 'function') {
+          window.MiniKit.ready();
+        }
+        // Навешиваем обработчики на экранные кнопки
+        const btnL = document.getElementById('btn-left');
+        const btnR = document.getElementById('btn-right');
+        const btnD = document.getElementById('btn-down');
+        const btnRot = document.getElementById('btn-rotate');
+        const safe = fn => () => { if (window.game && !window.game.gameOver) fn(); };
+        btnL?.addEventListener('click', safe(() => window.game.movePiece(-1, 0)));
+        btnR?.addEventListener('click', safe(() => window.game.movePiece(1, 0)));
+        btnD?.addEventListener('click', safe(() => window.game.dropPiece()));
+        btnRot?.addEventListener('click', safe(() => window.game.rotatePiece()));
+      });
+    </script>
 </body>
 </html>
