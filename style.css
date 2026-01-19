@@ -93,6 +93,51 @@ h1 {
     background: #1a1a2e;
 }
 
+/* Экранные кнопки для мобильных устройств */
+.touch-controls {
+    position: fixed;
+    bottom: 16px;
+    left: 0;
+    right: 0;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0 24px;
+    z-index: 200;
+    pointer-events: none; /* включаем только кнопки */
+}
+
+.touch-controls button {
+    width: 72px;
+    height: 72px;
+    border: none;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    backdrop-filter: blur(8px);
+    pointer-events: auto;
+}
+
+.touch-center {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+@media (max-width: 1024px) {
+    .touch-controls {
+        display: flex;
+    }
+    .game-wrapper {
+        padding-bottom: 120px;
+    }
+}
+
 .game-over {
     position: fixed;
     top: 50%;
