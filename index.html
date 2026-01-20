@@ -43,6 +43,27 @@
                 <canvas id="nextCanvas" width="120" height="120"></canvas>
             </div>
         </div>
+
+        <!-- Tip jar + daily tournament -->
+        <div class="actions-panel" id="actionsPanel">
+            <h2>Tip & Tournament</h2>
+            <div class="actions-row">
+                <button id="btn-tip">Tip (0.0005 ETH)</button>
+                <button id="btn-enter-tournament">Enter daily tournament</button>
+            </div>
+            <div class="tournament-stats">
+                <div><strong>Day</strong>: <span id="t-day">—</span></div>
+                <div><strong>Entry fee</strong>: <span id="t-fee">—</span></div>
+                <div><strong>Prize pool</strong>: <span id="t-pool">—</span></div>
+                <div><strong>Best score</strong>: <span id="t-best">—</span></div>
+                <div><strong>Leader</strong>: <span id="t-leader">—</span></div>
+            </div>
+            <div class="tx-status" id="tx-status"></div>
+            <p class="actions-note">
+                Tournament rule: highest score today wins the prize pool. Your score is taken from the current game score at the moment you enter.
+            </p>
+        </div>
+
         <div id="gameOver" class="game-over hidden">
             <h2>Игра окончена!</h2>
             <p>Финальный счёт: <span id="finalScore">0</span></p>
@@ -61,6 +82,9 @@
     <script src="tetris.js"></script>
     <!-- MiniKit ready signal for Base preview -->
     <script id="minikit-loader" src="https://cdn.jsdelivr.net/npm/@coinbase/minikit-js@1.1.0/dist/index.umd.js" defer></script>
+    <!-- Ethers for onchain tx (Tip / Tournament) -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" defer></script>
+    <script src="onchain.js" defer></script>
     <script>
       // Безопасный вызов MiniKit.ready с повторными попытками
       function tryMiniKitReady(maxTries = 20, delay = 300) {
