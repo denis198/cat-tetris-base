@@ -86,27 +86,19 @@
     <!-- Ethers for onchain tx (Tip / Tournament) -->
     <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" defer></script>
     <script src="onchain.js" defer></script>
-    <!-- MiniKit SDK for Base App integration -->
+    <!-- Frame SDK for Base App ready signal -->
     <script type="module">
-      // Import MiniKit SDK
-      import { MiniKit } from 'https://esm.sh/@coinbase/minikit-js@latest';
+      import sdk from 'https://esm.sh/@farcaster/frame-sdk@latest';
       
-      // Signal that app is ready
-      if (MiniKit && MiniKit.ready) {
-        MiniKit.ready();
-        console.log('[MiniKit] ready() called via ES module');
-      }
+      // Call ready when app is loaded
+      sdk.actions.ready().then(() => {
+        console.log('[SDK] ready() success');
+      }).catch(e => {
+        console.log('[SDK] ready() error:', e.message);
+      });
     </script>
     <script>
-      // Fallback for non-module environments
       window.addEventListener('load', () => {
-        // Try MiniKit global
-        setTimeout(() => {
-          if (window.MiniKit && window.MiniKit.ready) {
-            window.MiniKit.ready();
-            console.log('[MiniKit] ready() called via global');
-          }
-        }, 500);
         // Навешиваем обработчики на экранные кнопки
         const btnL = document.getElementById('btn-left');
         const btnR = document.getElementById('btn-right');
