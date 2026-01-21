@@ -12,6 +12,13 @@
     <meta property="og:description" content="A fun Tetris game with cat emojis">
     <meta property="og:image" content="https://cat-tetris-base.vercel.app/splash.png">
     <meta property="og:type" content="website">
+    <!-- Farcaster Frame / Mini App embed meta tags -->
+    <meta name="fc:frame" content="vNext">
+    <meta name="fc:frame:image" content="https://cat-tetris-base.vercel.app/splash.png">
+    <meta name="fc:frame:image:aspect_ratio" content="1:1">
+    <meta name="fc:frame:button:1" content="Play Cat Tetris">
+    <meta name="fc:frame:button:1:action" content="link">
+    <meta name="fc:frame:button:1:target" content="https://cat-tetris-base.vercel.app/">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -87,25 +94,45 @@
     <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" defer></script>
     <script src="onchain.js" defer></script>
     <script>
-      // Безопасный вызов MiniKit.ready с повторными попытками
-      function tryMiniKitReady(maxTries = 20, delay = 300) {
+      // Безопасный вызов MiniKit.ready с повторными попытками и логированием
+      function tryMiniKitReady(maxTries = 30, delay = 200) {
         let tries = 0;
+        console.log('[MiniKit] Starting ready check...');
         const timer = setInterval(() => {
+          tries++;
           if (window.MiniKit && typeof window.MiniKit.ready === 'function') {
             try {
               window.MiniKit.ready();
+              console.log('[MiniKit] ready() called successfully on try', tries);
               clearInterval(timer);
             } catch (e) {
-              // игнор, пробуем ещё
+              console.warn('[MiniKit] ready() error:', e);
             }
+          } else {
+            console.log('[MiniKit] SDK not loaded yet, try', tries);
           }
-          tries++;
-          if (tries >= maxTries) clearInterval(timer);
+          if (tries >= maxTries) {
+            console.warn('[MiniKit] Max tries reached, SDK may not be available');
+            clearInterval(timer);
+          }
         }, delay);
+      }
+
+      // Также пробуем отправить сигнал напрямую через postMessage (fallback)
+      function sendReadySignal() {
+        try {
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: 'minikit:ready' }, '*');
+            console.log('[MiniKit] Sent postMessage ready signal');
+          }
+        } catch (e) {
+          console.warn('[MiniKit] postMessage error:', e);
+        }
       }
 
       window.addEventListener('load', () => {
         tryMiniKitReady();
+        sendReadySignal();
         // Навешиваем обработчики на экранные кнопки
         const btnL = document.getElementById('btn-left');
         const btnR = document.getElementById('btn-right');
