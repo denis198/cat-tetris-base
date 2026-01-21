@@ -10,11 +10,15 @@ const ENTRY_FEE_ETH = "0.0001";
 
 const ABI = [
   "function entryFee() view returns (uint256)",
-  "function currentDay() view returns (uint256)",
   "function dayInfo(uint256) view returns (address leader, uint256 bestScore, uint256 prizePool)",
   "function tip() payable",
   "function enterTournament(uint256 score) payable",
 ];
+
+// Считаем текущий день локально (UTC), как в контракте: block.timestamp / 1 days
+function getCurrentDay() {
+  return Math.floor(Date.now() / 1000 / 86400);
+}
 
 function el(id) { return document.getElementById(id); }
 
@@ -42,7 +46,7 @@ async function getContract(readOnly = false) {
 async function refreshTournamentUI() {
   try {
     const contract = await getContract(true);
-    const dayId = await contract.currentDay();
+    const dayId = getCurrentDay();
     const info = await contract.dayInfo(dayId);
     const fee = await contract.entryFee();
 
