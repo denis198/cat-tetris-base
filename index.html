@@ -83,51 +83,30 @@
         <button aria-label="Вправо" id="btn-right">→</button>
     </div>
     <script src="tetris.js"></script>
-    <!-- MiniKit ready signal for Base preview -->
-    <script id="minikit-loader" src="https://cdn.jsdelivr.net/npm/@coinbase/minikit-js@1.1.0/dist/index.umd.js" defer></script>
     <!-- Ethers for onchain tx (Tip / Tournament) -->
     <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" defer></script>
     <script src="onchain.js" defer></script>
+    <!-- MiniKit SDK for Base App integration -->
+    <script type="module">
+      // Import MiniKit SDK
+      import { MiniKit } from 'https://esm.sh/@coinbase/minikit-js@latest';
+      
+      // Signal that app is ready
+      if (MiniKit && MiniKit.ready) {
+        MiniKit.ready();
+        console.log('[MiniKit] ready() called via ES module');
+      }
+    </script>
     <script>
-      // Безопасный вызов MiniKit.ready с повторными попытками и логированием
-      function tryMiniKitReady(maxTries = 30, delay = 200) {
-        let tries = 0;
-        console.log('[MiniKit] Starting ready check...');
-        const timer = setInterval(() => {
-          tries++;
-          if (window.MiniKit && typeof window.MiniKit.ready === 'function') {
-            try {
-              window.MiniKit.ready();
-              console.log('[MiniKit] ready() called successfully on try', tries);
-              clearInterval(timer);
-            } catch (e) {
-              console.warn('[MiniKit] ready() error:', e);
-            }
-          } else {
-            console.log('[MiniKit] SDK not loaded yet, try', tries);
-          }
-          if (tries >= maxTries) {
-            console.warn('[MiniKit] Max tries reached, SDK may not be available');
-            clearInterval(timer);
-          }
-        }, delay);
-      }
-
-      // Также пробуем отправить сигнал напрямую через postMessage (fallback)
-      function sendReadySignal() {
-        try {
-          if (window.parent && window.parent !== window) {
-            window.parent.postMessage({ type: 'minikit:ready' }, '*');
-            console.log('[MiniKit] Sent postMessage ready signal');
-          }
-        } catch (e) {
-          console.warn('[MiniKit] postMessage error:', e);
-        }
-      }
-
+      // Fallback for non-module environments
       window.addEventListener('load', () => {
-        tryMiniKitReady();
-        sendReadySignal();
+        // Try MiniKit global
+        setTimeout(() => {
+          if (window.MiniKit && window.MiniKit.ready) {
+            window.MiniKit.ready();
+            console.log('[MiniKit] ready() called via global');
+          }
+        }, 500);
         // Навешиваем обработчики на экранные кнопки
         const btnL = document.getElementById('btn-left');
         const btnR = document.getElementById('btn-right');
