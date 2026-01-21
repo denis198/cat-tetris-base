@@ -5,7 +5,7 @@
 const TOURNAMENT_ADDRESS = "0x077BE7ACb28996705d5aC7BCCE54005D3861cdB2";
 
 // Defaults (ETH amounts)
-const TIP_ETH = "0.0005";
+const TIP_ETH = "0.00005"; // уменьшили в 10 раз
 const ENTRY_FEE_ETH = "0.0001";
 
 const ABI = [
